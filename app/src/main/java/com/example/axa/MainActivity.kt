@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         // Inflate the view binding
         viewBinding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(viewBinding.root) // Gunakan viewBinding.root di sini
+        setContentView(viewBinding.root)
 
         adapter = AxaAdapter()
         with(viewBinding) {
