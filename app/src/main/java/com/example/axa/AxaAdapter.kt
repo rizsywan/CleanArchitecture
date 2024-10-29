@@ -1,13 +1,11 @@
 package com.example.axa
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.axa.core.domain.AxaEntity
+import com.example.axa.core.domain.model.AxaEntity
 import com.example.axa.databinding.ItemUserBinding
 
 class AxaAdapter : ListAdapter<AxaEntity, AxaAdapter.ListViewHolder>(DIFF_CALLBACK) {

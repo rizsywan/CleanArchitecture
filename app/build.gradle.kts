@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hiltAndroid)
 }
 
 android {
@@ -37,6 +39,10 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    hilt {
+        enableAggregatingTask = false
+    }
 }
 
 dependencies {
@@ -50,7 +56,12 @@ dependencies {
     implementation(libs.lifecycle.livedata)
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
+    implementation(libs.logging.interceptor)
     implementation(libs.recyclerview)
+    implementation(libs.coroutine.core)
+    implementation(libs.coroutine.android)
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

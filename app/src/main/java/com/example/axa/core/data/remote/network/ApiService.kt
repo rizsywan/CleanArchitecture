@@ -1,6 +1,6 @@
-package com.example.axa.core.data
+package com.example.axa.core.data.remote.network
 
-import retrofit2.Call
+import com.example.axa.core.data.remote.response.AxaResponse
 import retrofit2.http.GET
 
 interface ApiService {

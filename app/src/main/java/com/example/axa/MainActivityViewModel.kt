@@ -1,16 +1,21 @@
 package com.example.axa
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.axa.core.data.AxaRepository
-import com.example.axa.core.domain.AxaEntity
+import com.example.axa.core.data.remote.network.ApiResponse
+import com.example.axa.core.domain.model.AxaEntity
+import com.example.axa.core.domain.usecase.AxaUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainActivityViewModel(private val axaRepository: AxaRepository): ViewModel() {
-    private val _data = MutableLiveData<List<AxaEntity>>()
-    val data: LiveData<List<AxaEntity>> get() = _data
+@HiltViewModel
+class MainActivityViewModel @Inject constructor(private val axaUseCase: AxaUseCase): ViewModel() {
+    private val _dataFlow = MutableSharedFlow<ApiResponse<List<AxaEntity>>>()
+    val dataFlow = _dataFlow.asSharedFlow()
 
     init {
         fetchData()
@@ -18,7 +23,9 @@ class MainActivityViewModel(private val axaRepository: AxaRepository): ViewModel
 
     private fun fetchData() {
         viewModelScope.launch {
-            _data.value = axaRepository.getAxaData()
+            _dataFlow.emitAll(
+                axaUseCase.getData()
+            )
         }
     }
 }
